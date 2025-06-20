@@ -1,0 +1,11 @@
+session_id,start_time,end_time,latency_s,prompt_tokens,completion_tokens,total_tokens,tps,error,gpu_util_percent,gpu_memory_mib,output_head
+session-9969e4bb-3e6a-40d9-b63a-799976820ac3,2025-06-20T07:44:38.787047,2025-06-20T07:44:44.506744,5.72,,229,,40.04,,0,39356,<think>  </think>  ADD(Advance
+session-24d64318-ca8e-42a5-81f6-dbd78f216fb9,2025-06-20T07:44:38.788354,2025-06-20T07:44:45.091951,6.304,,229,,36.33,,0,39356,<think>  </think>  ADD(Advance
+session-8fdc6ebc-f6a7-479e-896c-d0a5f33e3b64,2025-06-20T07:44:38.788131,2025-06-20T07:44:46.002821,7.215,,229,,31.74,,0,39356,<think>  </think>  ADD(Advance
+session-b0a9ec87-06e1-4e2f-8674-88631612709a,2025-06-20T07:44:38.787380,2025-06-20T07:44:46.052100,7.265,,229,,31.52,,0,39356,<think>  </think>  ADD(Advance
+session-3c2cca80-5a29-4e71-af56-39bac5a16bf5,2025-06-20T07:44:38.787640,2025-06-20T07:44:46.103361,7.316,,229,,31.3,,0,39356,<think>  </think>  ADD(Advance
+session-dc8399dc-4c68-4bf7-b9b5-9b21e39fc79d,2025-06-20T07:44:38.787521,2025-06-20T07:44:47.017966,8.23,,229,,27.82,,0,39356,<think>  </think>  ADD(Advance
+session-2a0c168a-91c0-4454-a7c2-0d29360a2b2f,2025-06-20T07:44:38.787862,2025-06-20T07:44:47.070565,8.283,,229,,27.65,,0,39356,<think>  </think>  ADD(Advance
+session-010dcad4-08c2-441c-8716-d6e4c35af5f5,2025-06-20T07:44:38.787966,2025-06-20T07:44:47.979575,9.192,,229,,24.91,,0,39356,<think>  </think>  ADD(Advance
+session-a88a8527-f476-41fa-b003-65c2c66e0b6a,2025-06-20T07:44:38.787756,2025-06-20T07:44:48.033011,9.245,,229,,24.77,,0,39356,<think>  </think>  ADD(Advance
+session-172cd9cd-53de-48da-9c38-efadf24ff768,2025-06-20T07:44:38.788243,2025-06-20T07:44:48.097752,9.31,,229,,24.6,,0,39356,<think>  </think>  ADD(Advance
