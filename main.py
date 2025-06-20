@@ -9,7 +9,7 @@ import subprocess
 from datetime import datetime
 
 PROMPT = "ADD가 무인기 체계를 연구한 적 있나요?"
-# SESSION_COUNT = 640  # 동시 실행 세션 수, argparse에서 제어함
+DEFAULT_SESSION_COUNT = 1  # 동시 실행 세션 수
 
 # 측정할 항목: session_id, start_time, end_time, latency, prompt_tokens, completion_tokens, total_tokens, tps, error
 fields = [
@@ -47,7 +47,7 @@ def get_gpu_stats():
         return -1, -1  # 실패 시
 
 
-async def test_single_session(session_id: str, url: str, semaphore, results):
+async def test_single_session(session_id: str, url: str, semaphore, results, session_count):
     async with semaphore:
         messages = [
             {
@@ -123,6 +123,11 @@ async def test_single_session(session_id: str, url: str, semaphore, results):
                         tps = 0.0
                     end = datetime.utcnow().isoformat()
                     gpu_util, mem_used = get_gpu_stats()
+                    # output_head 분기 처리
+                    if session_count == 1:
+                        output_head = output.replace("\n", " ")
+                    else:
+                        output_head = output[:30].replace("\n", " ")
                     results.append(
                         [
                             session_id,
@@ -136,7 +141,7 @@ async def test_single_session(session_id: str, url: str, semaphore, results):
                             error,
                             gpu_util,
                             mem_used,
-                            output[:30].replace("\n", " "),
+                            output_head,
                         ]
                     )
         except Exception as e:
@@ -153,7 +158,7 @@ async def main(session_count: int):
 
     await asyncio.gather(
         *[
-            test_single_session(f"session-{uuid.uuid4()}", api_url, semaphore, results)
+            test_single_session(f"session-{uuid.uuid4()}", api_url, semaphore, results, session_count)
             for _ in range(session_count)
         ]
     )
@@ -171,6 +176,12 @@ async def main(session_count: int):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Stress-test runner")
-    parser.add_argument("session_count", type=int, help="동시 실행할 세션 수 (예: 10, 20, 40...)")
+    parser.add_argument(
+        "session_count",
+        nargs="?",
+        type=int,
+        default=DEFAULT_SESSION_COUNT,
+        help="동시 실행할 세션 수 (예: 10, 20, 40...) (기본값: 1)",
+    )
     args = parser.parse_args()
     asyncio.run(main(args.session_count))
