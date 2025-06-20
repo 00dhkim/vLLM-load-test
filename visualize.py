@@ -46,6 +46,8 @@ plt.figure(figsize=(20, 5))
 
 plt.subplot(1, 4, 1)
 plt.plot(summary["session_count"].values, summary["latency_mean"].values, marker="o")
+for x, y in zip(summary["session_count"].values, summary["latency_mean"].values):
+    plt.text(x, y, f"{y:.2f}", ha="center", va="bottom", fontsize=8)
 plt.xlabel("concurrent sessions")
 plt.ylabel("mean Latency (s)")
 plt.title("Average Latency")
@@ -54,18 +56,24 @@ plt.subplot(1, 4, 2)
 plt.plot(
     summary["session_count"].values, summary["gpu_util_mean"].values, marker="s", color="orange"
 )
+for x, y in zip(summary["session_count"].values, summary["gpu_util_mean"].values):
+    plt.text(x, y, f"{y:.2f}", ha="center", va="bottom", fontsize=8)
 plt.xlabel("concurrent sessions")
 plt.ylabel("mean GPU Utilization (%)")
 plt.title("GPU Utilization")
 
 plt.subplot(1, 4, 3)
 plt.plot(summary["session_count"].values, summary["gpu_mem_mean"].values, marker="^", color="green")
+for x, y in zip(summary["session_count"].values, summary["gpu_mem_mean"].values):
+    plt.text(x, y, f"{y:.2f}", ha="center", va="bottom", fontsize=8)
 plt.xlabel("concurrent sessions")
 plt.ylabel("mean GPU Memory (MiB)")
 plt.title("GPU Memory")
 
 plt.subplot(1, 4, 4)
 plt.plot(summary["session_count"].values, summary["tps_mean"].values, marker="d", color="purple")
+for x, y in zip(summary["session_count"].values, summary["tps_mean"].values):
+    plt.text(x, y, f"{y:.2f}", ha="center", va="bottom", fontsize=8)
 plt.xlabel("concurrent sessions")
 plt.ylabel("mean TPS (tokens/sec)")
 plt.title("Tokens per Second (TPS)")
@@ -74,12 +82,15 @@ plt.tight_layout()
 plt.savefig("images/stress_test_summary.png")
 
 plt.figure(figsize=(6, 4))
+error_rate = (summary["error_count"] / summary["session_count"] * 100).values
 plt.plot(
     summary["session_count"].values,
-    (summary["error_count"] / summary["session_count"] * 100).values,
+    error_rate,
     marker="x",
     color="red",
 )
+for x, y in zip(summary["session_count"].values, error_rate):
+    plt.text(x, y, f"{y:.2f}%", ha="center", va="bottom", fontsize=8)
 plt.xlabel("concurrent sessions")
 plt.ylabel("Error Rate (%)")
 plt.title("Error Rate by Session Count")
