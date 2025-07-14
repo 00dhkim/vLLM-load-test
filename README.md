@@ -21,10 +21,10 @@
 
 ## 🖼️ 측정 결과
 
-- A100 VRAG 40GB x 4
+- A100 VRAM 40GB x 4
 
-![summary](images/stress_test_summary.png "Summary")
+![summary](250620_singleGPU_images/stress_test_summary.png "Summary")
 
-![error rate](images/stress_test_error_rate.png "Error Rate")
+![error rate](250620_singleGPU_images/stress_test_error_rate.png "Error Rate")
 
 
