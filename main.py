@@ -7,6 +7,9 @@ import json
 import csv
 import subprocess
 from datetime import datetime
+import os
+
+os.makedirs("data", exist_ok=True)
 
 PROMPT = "ADD가 무인기 체계를 연구한 적 있나요?"
 DEFAULT_SESSION_COUNT = 1  # 동시 실행 세션 수
@@ -40,7 +43,7 @@ def get_gpu_stats():
                 "--format=csv,noheader,nounits",
             ]
         )
-        line = result.decode("utf-8").strip().split("\n")[1]  # 1번 GPU 사용중임
+        line = result.decode("utf-8").strip().split("\n")[0]  # 사용중인 GPU 번호: 0~3
         gpu_util, mem_used = line.split(", ")
         return int(gpu_util), int(mem_used)
     except Exception as e:
@@ -152,7 +155,7 @@ async def test_single_session(session_id: str, url: str, semaphore, results, ses
 
 
 async def main(session_count: int):
-    api_url = "http://localhost:8000/v1/chat/completions"
+    api_url = "http://localhost:15926/v1/chat/completions"
     semaphore = asyncio.Semaphore(session_count)
     results = []
 

@@ -5,6 +5,10 @@ from matplotlib.dates import date2num
 from datetime import datetime
 import matplotlib
 
+os.makedirs("images", exist_ok=True)
+matplotlib.use("Agg")
+
+
 # 1. CSV 파일 목록 불러오기 (data/ 폴더 하위)
 csv_files = sorted(glob.glob("data/stress_test_*_sess=*.csv"))
 
